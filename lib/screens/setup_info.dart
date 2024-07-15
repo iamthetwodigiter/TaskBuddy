@@ -13,7 +13,7 @@ class SetupInfo extends StatefulWidget {
 class _SetupInfoState extends State<SetupInfo> {
   late TextEditingController _nameController;
   Box user = Hive.box('user');
-  bool man = false;
+  bool man = true;
 
   @override
   void initState() {
@@ -53,9 +53,10 @@ class _SetupInfoState extends State<SetupInfo> {
                   padding: const EdgeInsets.all(8.0),
                   child: CupertinoTextField(
                     padding: const EdgeInsets.all(10),
-                    style: const TextStyle(color: Colors.deepOrange),
+                    style: const TextStyle(color: Colors.deepOrange, fontSize: 20),
                     controller: _nameController,
                     placeholder: 'Enter your name',
+                    placeholderStyle: const TextStyle(fontSize: 20, color: CupertinoColors.opaqueSeparator),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: CupertinoColors.separator,
@@ -68,7 +69,7 @@ class _SetupInfoState extends State<SetupInfo> {
                 const Spacer(),
                 const Text(
                   'Choose your gender',
-                  style: TextStyle(color: Colors.deepOrange),
+                  style: TextStyle(color: Colors.deepOrange,fontSize: 20),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +130,7 @@ class _SetupInfoState extends State<SetupInfo> {
                 ),
                 CupertinoButton(
                   color: Colors.deepOrange,
-                  child: const Text('Finish'),
+                  child: const Text('Finish', style: TextStyle(fontSize: 20),),
                   onPressed: () {
                     user.put('name', _nameController.text.trimRight());
                     user.put('gender', man ? 'male' : 'female');

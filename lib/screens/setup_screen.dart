@@ -48,6 +48,7 @@ class SetUpScreen extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: 15),
             ],
           ),
         ),

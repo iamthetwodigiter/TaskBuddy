@@ -19,6 +19,7 @@ class TaskCards extends StatefulWidget {
 
 class _TaskCardsState extends State<TaskCards> {
   Box<TaskModel> taskBox = Hive.box('tasks');
+  Box<TaskModel> completeBox = Hive.box('completedTasks');
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +45,16 @@ class _TaskCardsState extends State<TaskCards> {
               IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  taskBox.delete(widget.task.title);
+                  widget.isFinished
+                      ? completeBox.delete(widget.task.title)
+                      : taskBox.delete(widget.task.title);
                   Navigator.pop(context);
                   Navigator.of(context).pushReplacement(
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return const LandingScreen();
+                        return LandingScreen(
+                          page: widget.isFinished ? 1 : 0,
+                        );
                       },
                     ),
                   );

@@ -8,20 +8,30 @@ import 'package:taskbuddy/repository/task_model.dart';
 import 'package:taskbuddy/widgets/unfinished_tasks.dart';
 
 class LandingScreen extends StatefulWidget {
-  const LandingScreen({super.key});
+  final int page;
+  const LandingScreen({
+    super.key,
+    this.page = 0,
+  });
 
   @override
   State<LandingScreen> createState() => _LandingScreenState();
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  int selected = 0;
+  late int selected;
   Box<TaskModel> taskBox = Hive.box('tasks');
   Box user = Hive.box('user');
 
   final TextEditingController _titleContoller = TextEditingController();
   final TextEditingController _descriptionContoller = TextEditingController();
   final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.page;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +85,9 @@ class _LandingScreenState extends State<LandingScreen> {
                               padding: const EdgeInsets.all(10),
                               highlightColor: CupertinoColors.separator,
                               onPressed: () {
-                                Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const SearchScreen()));
+                                Navigator.of(context).push(CupertinoPageRoute(
+                                    builder: (context) =>
+                                        const SearchScreen()));
                               },
                               icon: const Icon(
                                 CupertinoIcons.search,
@@ -145,14 +157,17 @@ class _LandingScreenState extends State<LandingScreen> {
                                   CupertinoTextField(
                                     controller: _titleContoller,
                                     placeholder: 'Task Title',
+                                    placeholderStyle: const TextStyle(fontSize: 20, color: CupertinoColors.separator),
                                     style: const TextStyle(
                                       color: CupertinoColors.darkBackgroundGray,
+                                      
                                     ),
                                   ),
                                   const SizedBox(height: 10),
                                   CupertinoTextField(
                                     controller: _descriptionContoller,
                                     placeholder: 'Task Description',
+                                    placeholderStyle: const TextStyle(fontSize: 20, color: CupertinoColors.separator),
                                     style: const TextStyle(
                                       color: CupertinoColors.darkBackgroundGray,
                                     ),
