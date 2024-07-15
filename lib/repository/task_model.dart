@@ -5,18 +5,22 @@ part 'task_model.g.dart';
 @HiveType(typeId: 0)
 class TaskModel extends HiveObject {
   @HiveField(0)
-  final DateTime dateTime;
+  final String dateTime;
   @HiveField(1)
-  final bool isCompleted;
+  bool isCompleted;
   @HiveField(2)
   final String title;
   @HiveField(3)
   final String description;
+  @HiveField(4)
+  final String finishedTime;
 
   TaskModel({
     required this.dateTime,
     required this.isCompleted,
     required this.title,
     required this.description,
+    this.finishedTime = '',
   });
 }
+
