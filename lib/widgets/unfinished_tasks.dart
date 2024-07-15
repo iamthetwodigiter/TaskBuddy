@@ -19,6 +19,7 @@ class _UnfinishedTasksState extends State<UnfinishedTasks> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return SizedBox(
       child: ListView.builder(
         itemCount: taskBox.length,
@@ -141,9 +142,10 @@ class _UnfinishedTasksState extends State<UnfinishedTasks> {
                             Text(
                               taskBox.values.elementAt(index).title,
                               style: const TextStyle(
-                                  fontSize: 16,
-                                  color: CupertinoColors.darkBackgroundGray,
-                                  fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                color: CupertinoColors.darkBackgroundGray,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               taskBox.values.elementAt(index).description,
@@ -167,8 +169,32 @@ class _UnfinishedTasksState extends State<UnfinishedTasks> {
                   ),
                   IconButton(
                     onPressed: () {
-                      taskBox.deleteAt(index);
-                      setState(() {});
+                      showCupertinoDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CupertinoAlertDialog(
+                            title: const Text(
+                                'Are you sure you want to delete the task?'),
+                            actions: [
+                              CupertinoDialogAction(
+                                isDestructiveAction: true,
+                                child: const Text('No'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              CupertinoDialogAction(
+                                child: const Text('Yes'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  taskBox.deleteAt(index);
+                                  setState(() {});
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     icon: const Icon(
                       CupertinoIcons.delete_solid,

@@ -50,9 +50,11 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       home: setupNeeded ? const SetUpScreen() : const LandingScreen(),
       theme: const CupertinoThemeData(
+        scaffoldBackgroundColor: CupertinoColors.white,
         textTheme: CupertinoTextThemeData(
           textStyle: TextStyle(
             fontFamily: 'SFPro',
+            color: CupertinoColors.black
           ),
         ),
       ),

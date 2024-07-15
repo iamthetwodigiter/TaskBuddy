@@ -56,9 +56,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Search'),
-      ),
+      // navigationBar: const CupertinoNavigationBar(
+      //   middle: Text('Search'),
+      // ),
       child: SafeArea(
         child: Column(
           children: [
@@ -68,6 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(
                     child: CupertinoTextField(
+                      style: const TextStyle(color: CupertinoColors.darkBackgroundGray),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: CupertinoColors.separator, width: 1),
@@ -83,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     onPressed: () {},
                     icon: const Icon(
                       CupertinoIcons.search,
-                      color: CupertinoColors.separator,
+                      color: CupertinoColors.darkBackgroundGray,
                     ),
                   ),
                 ],

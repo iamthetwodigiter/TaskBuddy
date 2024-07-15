@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:taskbuddy/repository/task_model.dart';
+import 'package:taskbuddy/screens/landing_screen.dart';
 
 class TaskCards extends StatefulWidget {
   final TaskModel task;
@@ -40,18 +41,25 @@ class _TaskCardsState extends State<TaskCards> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              // IconButton(
-              //   padding: EdgeInsets.zero,
-              //   onPressed: () {
-              //     taskBox.delete(widget.task.title);
-              //     Navigator.pop(context);
-              //     setState(() {});
-              //   },
-              //   icon: const Icon(
-              //     CupertinoIcons.delete_solid,
-              //     color: CupertinoColors.destructiveRed,
-              //   ),
-              // ),
+              IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  taskBox.delete(widget.task.title);
+                  Navigator.pop(context);
+                  Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return const LandingScreen();
+                      },
+                    ),
+                  );
+                  setState(() {});
+                },
+                icon: const Icon(
+                  CupertinoIcons.delete_solid,
+                  color: CupertinoColors.destructiveRed,
+                ),
+              ),
             ],
           ),
           const Divider(),

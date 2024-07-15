@@ -120,14 +120,14 @@ class _LandingScreenState extends State<LandingScreen> {
                       'Have a Good Day,',
                       style: TextStyle(
                         color: CupertinoColors.black,
-                        fontSize: 45,
+                        fontSize: 40,
                       ),
                     ),
                     Text(
                       '${user.get('name')} 👋🏻',
                       style: const TextStyle(
                         color: CupertinoColors.black,
-                        fontSize: 50,
+                        fontSize: 45,
                       ),
                     ),
                     const SizedBox(height: 10),
